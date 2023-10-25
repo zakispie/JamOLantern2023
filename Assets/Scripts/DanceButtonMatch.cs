@@ -3,45 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Represents an action in a dance, usually represented by a keypress
-/// </summary>
-public enum DanceAction
-{
-    UpDance,
-    DownDance,
-    LeftDance,
-    RightDance
-}
-
-/// <summary>
-/// Represents a dance result (success, failure, ignore)
-/// </summary>
-public enum DanceStatus
-{
-    Correct,
-    Incorrect,
-    Neutral
-}
-
-/// <summary>
-/// Represents a dance minigame that can be played given a DanceAction
-/// </summary>
-public abstract class DanceMinigame : MonoBehaviour
-{
-    public abstract DanceStatus PerformDance(DanceAction action);
-}
-
-/// <summary>
 /// Class to handle the button-matching dance minigame
 /// </summary>
 public class DanceButtonMatch : DanceMinigame
 {
-    [Tooltip("Dance Actions That Represent A Sequence of Dance Actions")]
-    [SerializeField] private List<DanceAction> comboSequence;
-    
-    [Tooltip("Sprites to Represent the Dance Actions (should be same order as comboSequence)")]
-    [SerializeField] private List<Sprite> comboSpriteSequence;
-    
+    [Tooltip("Possible dance sequences")] 
+    [SerializeField] private List<DanceSequence> possibleDanceSequences;
+
     [Tooltip("Delay between combos (50 = 1 second)")]
     [SerializeField] private int delayBetweenCombos;
 
@@ -56,6 +24,9 @@ public class DanceButtonMatch : DanceMinigame
 
     // Tracks a counter for delaying how often dance sequences appear
     private int delayCounter = 0;
+    
+    // Tracks current dance sequence
+    private DanceSequence currentDanceSequence;
 
     /// <summary>
     /// Assigns buttonImage and disables it
@@ -79,6 +50,7 @@ public class DanceButtonMatch : DanceMinigame
         if (delayCounter >= delayBetweenCombos)
         {
             delayCounter = 0;
+            currentDanceSequence = possibleDanceSequences[Random.Range(0, possibleDanceSequences.Count)];
             danceInProgress = true;
             StartDance();
         }
@@ -104,13 +76,16 @@ public class DanceButtonMatch : DanceMinigame
         if (!danceInProgress) { return DanceStatus.Neutral; } // ignore input if dance is not active 
 
         // Dance Move Failed:
-        if (comboSequence[placeInCombo] != action) {
+        if (currentDanceSequence.comboSequence[placeInCombo] != action) {
             // Dance combo failed
            return DanceFail();
         }
 
         // Dance Move Succeeded:
-        if (++placeInCombo == comboSequence.Count) {
+        PlayerController.animator.enabled = false; // disable animator so we can hijack for our sweet moves
+        PlayerController.spriteRenderer.sprite = currentDanceSequence.playerSpriteSequence[placeInCombo];
+        
+        if (++placeInCombo == currentDanceSequence.comboSequence.Count) {
             // Completed the dance combo successfully
             return DanceSuccess();
         }
@@ -131,6 +106,7 @@ public class DanceButtonMatch : DanceMinigame
         Debug.Log("Combo Success!");
         placeInCombo = 0;
         danceInProgress = false;
+        PlayerController.animator.enabled = true; // return control of animator
         return DanceStatus.Correct;
     }
 
@@ -145,6 +121,7 @@ public class DanceButtonMatch : DanceMinigame
         Debug.Log("Combo Broken!");
         placeInCombo = 0;
         danceInProgress = false;
+        PlayerController.animator.enabled = true; // return control of animator
         return DanceStatus.Incorrect;
     }
 
@@ -153,6 +130,6 @@ public class DanceButtonMatch : DanceMinigame
     /// </summary>
     void DisplayNextAction()
     {
-        buttonImage.sprite = comboSpriteSequence[placeInCombo];
+        buttonImage.sprite = currentDanceSequence.keyboardSpriteSequence[placeInCombo];
     }
 }

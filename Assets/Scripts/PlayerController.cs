@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     
     // Player Sprite Renderer
-    private SpriteRenderer spriteRenderer;
+    public static SpriteRenderer spriteRenderer;
+    
+    // Player Animator
+    public static Animator animator;
 
     // Dance minigame component
     private DanceMinigame danceMinigame;
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponentInChildren<Rigidbody2D>();
         spriteRenderer  = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
         danceMinigame = GameObject.FindGameObjectWithTag("DanceController").GetComponent<DanceButtonMatch>();
     }
     
