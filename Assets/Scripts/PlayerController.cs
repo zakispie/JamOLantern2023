@@ -9,17 +9,23 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Player Movement Speed")]
     [SerializeField] private float movementSpeed;
 
+    // Represents this PlayerController
+    private static PlayerController instance;
+    
     // Movement Input as a Vector2
     private Vector2 movementInput = Vector2.zero;
     
     // Player Rigidbody
-    private Rigidbody2D rb;
+    private static Rigidbody2D rb;
     
     // Player Sprite Renderer
     public static SpriteRenderer spriteRenderer;
     
     // Player Animator
     public static Animator animator;
+
+    // Player position
+    public static Vector2 playerPosition => instance.transform.position;
 
     // Dance minigame component
     private DanceMinigame danceMinigame;
@@ -29,6 +35,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        instance = this;
         rb = GetComponentInChildren<Rigidbody2D>();
         spriteRenderer  = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();

@@ -101,6 +101,7 @@ public class DanceButtonMatch : DanceMinigame
     /// <returns> DanceStatus.Correct </returns>
     DanceStatus DanceSuccess()
     {
+        Instantiate(currentDanceSequence.successEffect, PlayerController.playerPosition, Quaternion.identity);
         placeInCombo = 0;
         buttonImage.gameObject.SetActive(false);
         Debug.Log("Combo Success!");
@@ -116,6 +117,7 @@ public class DanceButtonMatch : DanceMinigame
     /// <returns> DanceStatus.Incorrect </returns>
     DanceStatus DanceFail()
     {
+        Instantiate(currentDanceSequence.failEffect, PlayerController.playerPosition, Quaternion.identity);
         placeInCombo = 0;
         buttonImage.gameObject.SetActive(false);
         Debug.Log("Combo Broken!");
