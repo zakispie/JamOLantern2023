@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 /// A MonoBehavior to control the physics and movement of the player
@@ -8,6 +10,9 @@ public class PlayerController : MonoBehaviour
 {
     [Tooltip("Player Movement Speed")]
     [SerializeField] private float movementSpeed;
+    [SerializeField] private Tilemap tilemap;
+    
+    private Vector3Int nextCellPosition;
 
     // Represents this PlayerController
     private static PlayerController instance;
@@ -39,9 +44,18 @@ public class PlayerController : MonoBehaviour
         rb = GetComponentInChildren<Rigidbody2D>();
         spriteRenderer  = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
-        danceMinigame = GameObject.FindGameObjectWithTag("DanceController").GetComponent<DanceButtonMatch>();
+        var danceController = GameObject.FindGameObjectWithTag("DanceController");
+        if (danceController != null)
+        {
+            danceMinigame = GameObject.FindGameObjectWithTag("DanceController").GetComponent<DanceButtonMatch>();
+        }
     }
-    
+
+    private void Start()
+    {
+        nextCellPosition = tilemap.WorldToCell(transform.position);
+    }
+
     /// <summary>
     /// Given a DanceAction, relays the action to attempt to perform a dance. Then handles necessary logic based on the returned DanceStatus
     /// </summary>
@@ -64,7 +78,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movementInput * (Time.fixedDeltaTime * movementSpeed));
+        //rb.MovePosition(rb.position + movementInput * (Time.fixedDeltaTime * movementSpeed));
     }
     
     #region Receive Inputs
@@ -79,6 +93,22 @@ public class PlayerController : MonoBehaviour
         movementInput = input;
         // flip sprite based on movement
         if (input.x != 0) spriteRenderer.flipX = input.x > 0;
+        MoveAround();
+    }
+    
+    private void MoveAround()
+    {
+        nextCellPosition += new Vector3Int((int)movementInput.x, (int)movementInput.y, 0);
+        if (tilemap.HasTile(nextCellPosition))
+        {
+            Vector3 nextCellWorldPosition = tilemap.GetCellCenterWorld(nextCellPosition);
+            Vector3  newPosition = new Vector3(nextCellWorldPosition.x, nextCellWorldPosition.y, -1);
+            transform.position = newPosition;
+        }
+        else
+        {
+            Debug.Log("Game Over!");
+        }
     }
 
     /// <summary>
