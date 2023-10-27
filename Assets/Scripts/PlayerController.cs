@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -89,6 +88,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="inputValue"> Received input value from Unity Input System </param>
     private void OnMovement(InputValue inputValue)
     {
+        RelayAction(DanceAction.BogusDance); // fail dance combo if try to walk during it
         Vector2 input  = inputValue.Get<Vector2>();
         movementInput = input;
         // flip sprite based on movement
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         if (tilemap.HasTile(nextCellPosition))
         {
             Vector3 nextCellWorldPosition = tilemap.GetCellCenterWorld(nextCellPosition);
-            Vector3  newPosition = new Vector3(nextCellWorldPosition.x, nextCellWorldPosition.y, -1);
+            Vector3 newPosition = new Vector3(nextCellWorldPosition.x, nextCellWorldPosition.y, -1);
             transform.position = newPosition;
         }
         else

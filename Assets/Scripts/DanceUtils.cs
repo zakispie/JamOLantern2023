@@ -5,6 +5,7 @@ using UnityEngine;
 /// </summary>
 public enum DanceAction
 {
+    BogusDance, // represents random inputs (such as movement) during a dance
     UpDance,
     DownDance,
     LeftDance,
