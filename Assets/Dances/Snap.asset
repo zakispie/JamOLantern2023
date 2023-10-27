@@ -31,3 +31,5 @@ MonoBehaviour:
   - {fileID: 13948288, guid: e41f0bd7e0e2047148567051047a033a, type: 3}
   - {fileID: -801285064, guid: e41f0bd7e0e2047148567051047a033a, type: 3}
   - {fileID: 838781009, guid: e41f0bd7e0e2047148567051047a033a, type: 3}
+  successEffect: {fileID: 5407847099506985989, guid: 0a61b38af046d4e46b20c15a828addb3, type: 3}
+  failEffect: {fileID: 6409092567010055499, guid: 71ef7aec40321437caaba950c8a70cc6, type: 3}
