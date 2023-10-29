@@ -1,3 +1,5 @@
 Player Sprite & Animations: https://opengameart.org/content/dancing-girl-sprites
 Keyboard Sprites: https://dreammix.itch.io/keyboard-keys-for-ui
 Floor Tiles: https://opengameart.org/content/gb-minimalist-bricks-tileset
+Wood Block Click Audio: https://elements.envato.com/single-wood-block-hit-P3M8T6C
+Number Sprites: https://opengameart.org/content/numbers-0-9-7x10px
