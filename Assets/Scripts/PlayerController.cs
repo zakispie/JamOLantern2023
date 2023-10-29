@@ -110,6 +110,20 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    public bool IsOccupying(Vector3Int cellPosition)
+    {
+        if (cellPosition == nextCellPosition)
+            return true;
+
+        foreach (var d in dancers)
+        {
+            if (d.transform.position == tilemap.GetCellCenterWorld(cellPosition))
+                return true;
+        }
+
+        return false;
+    }
+    
     /// <summary>
     /// Updates the position of the rigidbody based on the current movement input
     /// </summary>
