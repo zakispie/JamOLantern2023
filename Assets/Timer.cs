@@ -29,11 +29,11 @@ public class Timer : MonoBehaviour
     {
         while (timerEnabled)
         {
-            timeText.text = secondsUntilLose.ToString();
+            timeText.text = "Time Remaining: " + secondsUntilLose.ToString();
             if (secondsUntilLose <= 0)
             {
                 timerEnabled = false;
-                timeText.text = "0";
+                timeText.text = "Time Remaining: 0";
                 Debug.Log("Game over!");
             }
 
