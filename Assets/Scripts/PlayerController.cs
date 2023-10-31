@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="inputValue"> Received input value from Unity Input System </param>
     private void OnMovement(InputValue inputValue)
     {
-        //RelayAction(DanceAction.BogusDance); // fail dance combo if try to walk during it
+        RelayAction(DanceAction.BogusDance); // fail dance combo if try to walk during it
         Vector2 input  = inputValue.Get<Vector2>();
         movementInput = input;
         // flip sprite based on movement
