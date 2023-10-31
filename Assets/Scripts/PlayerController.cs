@@ -86,12 +86,12 @@ public class PlayerController : MonoBehaviour
     
     private void MoveAround()
     {
-        prevPosition = transform.position;
         nextCellPosition += new Vector3Int((int)movementInput.x, (int)movementInput.y, 0);
         if (tilemap.HasTile(nextCellPosition))
         {
             Vector3 nextCellWorldPosition = tilemap.GetCellCenterWorld(nextCellPosition);
             Vector3 newPosition = new Vector3(nextCellWorldPosition.x, nextCellWorldPosition.y, -1);
+            prevPosition = transform.position;
             transform.position = newPosition;
             //Debug.Log(dancers.Count.ToString());
             if (transform.position != prevPosition)
