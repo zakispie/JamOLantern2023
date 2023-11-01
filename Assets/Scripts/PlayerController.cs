@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -11,9 +13,11 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Player Movement Speed")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private float percentageLost = 0.25f;
     
     private Vector3Int nextCellPosition;
     private Vector3 prevPosition;
+    private LevelManager levelManager;
 
     // Represents this PlayerController
     private static PlayerController instance;
@@ -60,6 +64,11 @@ public class PlayerController : MonoBehaviour
         nextCellPosition = tilemap.WorldToCell(transform.position);
     }
 
+    public void AddManager(LevelManager manager)
+    {
+        levelManager = manager;
+    }
+
     /// <summary>
     /// Given a DanceAction, relays the action to attempt to perform a dance. Then handles necessary logic based on the returned DanceStatus
     /// </summary>
@@ -72,8 +81,18 @@ public class PlayerController : MonoBehaviour
                 // Action Correct
                 break;
             case DanceStatus.Incorrect:
-                // Action Incorrect
+                DropPeople();
                 break;
+        }
+    }
+
+    void DropPeople()
+    {
+        int peopleLost = Mathf.FloorToInt(dancers.Count * (1 - percentageLost));
+        for (int i = dancers.Count - 1; i >= peopleLost; i--)
+        {
+            levelManager.PlaceRandomly(dancers[i]);
+            dancers.RemoveAt(i);
         }
     }
 
