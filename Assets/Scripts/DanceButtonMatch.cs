@@ -200,6 +200,7 @@ public class DanceButtonMatch : DanceMinigame
         }
         
         // Combo not finished yet, another key needed
+        ScoreCounter.AddScore(ScoreCounter.ScoreType.DanceMove);
         DisplayNextAction();
         return DanceStatus.Correct;
     }
@@ -210,6 +211,8 @@ public class DanceButtonMatch : DanceMinigame
     /// <returns> DanceStatus.Correct </returns>
     DanceStatus DanceSuccess()
     {
+        ScoreCounter.AddScore(ScoreCounter.ScoreType.DanceMove);
+        ScoreCounter.AddScore(ScoreCounter.ScoreType.DanceSequence);
         buttonImage.gameObject.SetActive(false);
         queuedButton1.gameObject.SetActive(false);
         queuedButton2.gameObject.SetActive(false);
@@ -231,6 +234,7 @@ public class DanceButtonMatch : DanceMinigame
     /// <returns> DanceStatus.Incorrect </returns>
     DanceStatus DanceFail()
     {
+        ScoreCounter.AddScore(ScoreCounter.ScoreType.DanceMove);
         buttonImage.gameObject.SetActive(false);
         queuedButton1.gameObject.SetActive(false);
         queuedButton2.gameObject.SetActive(false);

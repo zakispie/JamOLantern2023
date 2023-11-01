@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DanceSequence
   comboSequence: 0400000002000000010000000300000002000000010000000400000002000000
   keyboardSpriteSequence:
-  - {fileID: -1475324098, guid: 57a9c8128c5af46ff838c13aaef0a94c, type: 3}
-  - {fileID: 980221253, guid: 57a9c8128c5af46ff838c13aaef0a94c, type: 3}
-  - {fileID: 2064709321, guid: 57a9c8128c5af46ff838c13aaef0a94c, type: 3}
-  - {fileID: -1442369358, guid: 57a9c8128c5af46ff838c13aaef0a94c, type: 3}
-  - {fileID: 980221253, guid: 57a9c8128c5af46ff838c13aaef0a94c, type: 3}
-  - {fileID: 2064709321, guid: 57a9c8128c5af46ff838c13aaef0a94c, type: 3}
-  - {fileID: -1475324098, guid: 57a9c8128c5af46ff838c13aaef0a94c, type: 3}
-  - {fileID: 980221253, guid: 57a9c8128c5af46ff838c13aaef0a94c, type: 3}
+  - {fileID: 21300000, guid: 2a0a0063bbbd24d0b921cf2773826586, type: 3}
+  - {fileID: 21300000, guid: e6a0261dfdb8c4d979dcb69c2f0c711a, type: 3}
+  - {fileID: 21300000, guid: b2841cebcace64641bb233778dca5fea, type: 3}
+  - {fileID: 21300000, guid: ea266b73e6bc14c1c99dc2eb3174cc18, type: 3}
+  - {fileID: 21300000, guid: e6a0261dfdb8c4d979dcb69c2f0c711a, type: 3}
+  - {fileID: 21300000, guid: b2841cebcace64641bb233778dca5fea, type: 3}
+  - {fileID: 21300000, guid: 2a0a0063bbbd24d0b921cf2773826586, type: 3}
+  - {fileID: 21300000, guid: e6a0261dfdb8c4d979dcb69c2f0c711a, type: 3}
   playerSpriteSequence:
   - {fileID: 513332955, guid: e41f0bd7e0e2047148567051047a033a, type: 3}
   - {fileID: 1071593031, guid: e41f0bd7e0e2047148567051047a033a, type: 3}

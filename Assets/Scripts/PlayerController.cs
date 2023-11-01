@@ -69,10 +69,10 @@ public class PlayerController : MonoBehaviour
         var result = danceMinigame.PerformDance(action);
         switch (result) {
             case DanceStatus.Correct:
-                // Do any "on correct action" feedback here.
+                // Action Correct
                 break;
             case DanceStatus.Incorrect:
-                // Do any "on action incorrect" feedback here.
+                // Action Incorrect
                 break;
         }
     }
