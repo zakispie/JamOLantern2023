@@ -10,6 +10,7 @@ namespace DefaultNamespace
         [SerializeField] private Sprite RightSprite;
         [SerializeField] private Sprite UpSprite;
         [SerializeField] private Sprite DownSprite;
+        [SerializeField] private Sprite BogusSprite;
         private bool _changedSprite;
         private LevelManager _levelManager;
         private bool _inLine;
@@ -25,6 +26,7 @@ namespace DefaultNamespace
         
         public void changeSprite(DanceAction action)
         {
+            //TODO: Change to Idle Sprite
             if (action == DanceAction.UpDance)
             {
                 
@@ -40,6 +42,10 @@ namespace DefaultNamespace
             else if (action == DanceAction.RightDance)
             {
                 
+            } 
+            else if (action == DanceAction.BogusDance)
+            {
+
             }
 
             _changedSprite = true;
@@ -56,6 +62,7 @@ namespace DefaultNamespace
                 {
                     _changedSprite = false;
                     _spriteChangeCounter = 0f;
+                    //TODO: Change to Idle Sprite
                 }
             }
         }
