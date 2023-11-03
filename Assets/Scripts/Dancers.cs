@@ -10,11 +10,12 @@ namespace DefaultNamespace
         [SerializeField] private Sprite RightSprite;
         [SerializeField] private Sprite UpSprite;
         [SerializeField] private Sprite DownSprite;
-        [SerializeField] private Sprite BogusSprite;
+        [SerializeField] private Sprite SadSprite;
         private bool _changedSprite;
         private LevelManager _levelManager;
         private bool _inLine;
         private float _spriteChangeCounter;
+        private SpriteRenderer spriteRenderer;
 
         private void Start()
         {
@@ -22,6 +23,14 @@ namespace DefaultNamespace
             _inLine = false;
             _changedSprite = false;
             _spriteChangeCounter = 0f;
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        public void sadSprite()
+        {
+            spriteRenderer.sprite = SadSprite;
+            _changedSprite = true;
+            _spriteChangeCounter = 0;
         }
         
         public void changeSprite(DanceAction action)
@@ -29,23 +38,23 @@ namespace DefaultNamespace
             //TODO: Change to Idle Sprite
             if (action == DanceAction.UpDance)
             {
-                
+                spriteRenderer.sprite = UpSprite;
             } 
             else if (action == DanceAction.DownDance)
             {
-                
+                spriteRenderer.sprite = DownSprite;
             }
             else if (action == DanceAction.LeftDance)
             {
-                
+                spriteRenderer.sprite = LeftSprite;
             }
             else if (action == DanceAction.RightDance)
             {
-                
+                spriteRenderer.sprite = RightSprite;
             } 
             else if (action == DanceAction.BogusDance)
             {
-
+                spriteRenderer.sprite = SadSprite;
             }
 
             _changedSprite = true;
@@ -62,7 +71,7 @@ namespace DefaultNamespace
                 {
                     _changedSprite = false;
                     _spriteChangeCounter = 0f;
-                    //TODO: Change to Idle Sprite
+                    spriteRenderer.sprite = IdleSprite;
                 }
             }
         }

@@ -46,16 +46,16 @@ public class DisplayScores : MonoBehaviour
         }
         
         scoreCanvas.GetComponentInChildren<TextMeshProUGUI>().text =
-            "Dance Move : " + ScoreCounter.GetScore(ScoreCounter.ScoreType.DanceMove) + "\n" +
-            "Dance Move Highscore : " + danceMoveHighScore + "\n" +
-            "Dance Sequence : " + ScoreCounter.GetScore(ScoreCounter.ScoreType.DanceSequence) + "\n" +
-            "Dance Sequence Highscore : " + danceSequenceHighScore + "\n" +
-            "Partygoers : " + ScoreCounter.GetScore(ScoreCounter.ScoreType.Partygoer) + "\n" +
-            "Partygoers : " + partygoers + "\n" +
-            "Time : " + ScoreCounter.GetScore(ScoreCounter.ScoreType.Time) + "\n" +
-            "Fails : " + ScoreCounter.GetScore(ScoreCounter.ScoreType.FailedMove) + "\n" +
-            "Game Final Score : " + realTimeHighScore + "\n" +
-            "Highscore : " + totalHighScore;
+            "Successful Dance Moves: " + ScoreCounter.GetScore(ScoreCounter.ScoreType.DanceMove) + "\n" +
+            //"Dance Move Highscore : " + danceMoveHighScore + "\n" +
+            "Successful Dance Sequences: " + ScoreCounter.GetScore(ScoreCounter.ScoreType.DanceSequence) + "\n" +
+            //"Dance Sequence Highscore : " + danceSequenceHighScore + "\n" +
+            "Partygoers In Conga Line: " + ScoreCounter.GetScore(ScoreCounter.ScoreType.Partygoer) + "\n" +
+            //"Partygoers : " + partygoers + "\n" +
+            "Time Remaining: " + ScoreCounter.GetScore(ScoreCounter.ScoreType.Time) + "\n" +
+            "Failed Dance Moves: -" + ScoreCounter.GetScore(ScoreCounter.ScoreType.FailedMove) + "\n" +
+            "\nFinal Score: " + realTimeHighScore + "\n" +
+            "High Score: " + totalHighScore;
     }
 
     public void MainMenu()

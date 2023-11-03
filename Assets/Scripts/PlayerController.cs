@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 prevPosition;
     private LevelManager levelManager;
 
+    public static AudioSource playerAudioSource;
+
     // Represents this PlayerController
     private static PlayerController instance;
     
@@ -31,8 +33,8 @@ public class PlayerController : MonoBehaviour
     // Player Sprite Renderer
     public static SpriteRenderer spriteRenderer;
     
-    // Player Animator
-    public static Animator animator;
+    // Player Sprite
+    public static Sprite defaultSprite;
 
     // Player position
     public static Vector2 playerPosition => instance.transform.position;
@@ -50,10 +52,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        playerAudioSource = GetComponentInChildren<AudioSource>();
         scores = FindObjectOfType<ScoreCounter>();
         rb = GetComponentInChildren<Rigidbody2D>();
         spriteRenderer  = GetComponentInChildren<SpriteRenderer>();
-        animator = GetComponentInChildren<Animator>();
         var danceController = GameObject.FindGameObjectWithTag("DanceController");
         if (danceController != null)
         {
@@ -63,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        defaultSprite = GetComponentInChildren<SpriteRenderer>().sprite;
         nextCellPosition = tilemap.WorldToCell(transform.position);
     }
 
@@ -78,6 +81,7 @@ public class PlayerController : MonoBehaviour
     void RelayAction(DanceAction action)
     {
         var result = danceMinigame.PerformDance(action);
+        
         switch (result) {
             case DanceStatus.Correct:
                 // Action Correct
@@ -88,6 +92,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case DanceStatus.Incorrect:
                 DropPeople();
+                foreach (var d in dancers)
+                {
+                    d.GetComponent<Dancers>().sadSprite();
+                }
                 break;
         }
     }

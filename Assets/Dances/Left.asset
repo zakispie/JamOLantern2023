@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Left
   m_EditorClassIdentifier: 
   comboSequence: 3
-  keyboardSpriteSequence: {fileID: 21300000, guid: ea266b73e6bc14c1c99dc2eb3174cc18, type: 3}
-  playerSpriteSequence: {fileID: 513332955, guid: e41f0bd7e0e2047148567051047a033a, type: 3}
+  keyboardSpriteSequence: {fileID: 21300000, guid: e3b79de1a8daa4c878f4ed452d25800a, type: 3}
+  playerSpriteSequence: {fileID: -1079534290, guid: 5506c92e7b5734dd3b16eaba61d004c0, type: 3}
