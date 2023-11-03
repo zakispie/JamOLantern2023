@@ -72,6 +72,7 @@ public class DanceButtonMatch : DanceMinigame
         queuedButton1.gameObject.SetActive(false);
         queuedButton2.gameObject.SetActive(false);
         queuedButton3.gameObject.SetActive(false);
+        currentDanceSequence = new List<DanceMove>();
         for (int i = 0; i < Random.Range(4, 9); i++)
         {
             currentDanceSequence.Add(possibleDanceMoves[Random.Range(0, possibleDanceMoves.Count)]);
