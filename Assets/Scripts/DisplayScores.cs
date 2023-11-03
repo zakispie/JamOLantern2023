@@ -46,16 +46,13 @@ public class DisplayScores : MonoBehaviour
         }
         
         scoreCanvas.GetComponentInChildren<TextMeshProUGUI>().text =
-            "Successful Dance Moves: " + ScoreCounter.GetScore(ScoreCounter.ScoreType.DanceMove) + "\n" +
-            //"Dance Move Highscore : " + danceMoveHighScore + "\n" +
-            "Successful Dance Sequences: " + ScoreCounter.GetScore(ScoreCounter.ScoreType.DanceSequence) + "\n" +
-            //"Dance Sequence Highscore : " + danceSequenceHighScore + "\n" +
-            "Partygoers In Conga Line: " + ScoreCounter.GetScore(ScoreCounter.ScoreType.Partygoer) + "\n" +
-            //"Partygoers : " + partygoers + "\n" +
-            "Time Remaining: " + ScoreCounter.GetScore(ScoreCounter.ScoreType.Time) + "\n" +
-            "Failed Dance Moves: -" + ScoreCounter.GetScore(ScoreCounter.ScoreType.FailedMove) + "\n" +
-            "\nFinal Score: " + realTimeHighScore + "\n" +
-            "High Score: " + totalHighScore;
+            ScoreCounter.GetScore(ScoreCounter.ScoreType.DanceMove) + "\n" +
+            ScoreCounter.GetScore(ScoreCounter.ScoreType.DanceSequence) + "\n" +
+            ScoreCounter.GetScore(ScoreCounter.ScoreType.Partygoer) + "\n" +
+            ScoreCounter.GetScore(ScoreCounter.ScoreType.Time) + "\n-" +
+            ScoreCounter.GetScore(ScoreCounter.ScoreType.FailedMove) + "\n \n" +
+            realTimeHighScore + "\n" +
+            totalHighScore;
     }
 
     public void MainMenu()

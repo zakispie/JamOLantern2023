@@ -1,19 +1,22 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
     public class Dancers : MonoBehaviour
     {
-        [SerializeField] private Sprite IdleSprite;
+        [SerializeField] public Sprite IdleSprite;
         [SerializeField] private Sprite LeftSprite;
         [SerializeField] private Sprite RightSprite;
         [SerializeField] private Sprite UpSprite;
         [SerializeField] private Sprite DownSprite;
         [SerializeField] private Sprite SadSprite;
+        [SerializeField] private List<Sprite> inLineSprites;
         private bool _changedSprite;
         private LevelManager _levelManager;
-        private bool _inLine;
+        [HideInInspector] public bool _inLine;
         private float _spriteChangeCounter;
         private SpriteRenderer spriteRenderer;
 
@@ -71,7 +74,14 @@ namespace DefaultNamespace
                 {
                     _changedSprite = false;
                     _spriteChangeCounter = 0f;
-                    spriteRenderer.sprite = IdleSprite;
+                    if (_inLine)
+                    {
+                        spriteRenderer.sprite = inLineSprites[Random.Range(0, inLineSprites.Count)];
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = IdleSprite;
+                    }
                 }
             }
         }
@@ -81,6 +91,7 @@ namespace DefaultNamespace
             if (!_inLine && other.CompareTag("Player"))
             {
                 _levelManager.AddToLine(gameObject);
+                spriteRenderer.sprite = inLineSprites[Random.Range(0, inLineSprites.Count)];
                 _inLine = true;
             }
         }

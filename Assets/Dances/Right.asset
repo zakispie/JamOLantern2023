@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboSequence: 4
   keyboardSpriteSequence: {fileID: 21300000, guid: 1a08ec7aee3ca4ba98952b14415cd3b4, type: 3}
-  playerSpriteSequence: {fileID: -2083992949, guid: 5506c92e7b5734dd3b16eaba61d004c0, type: 3}
+  playerSpriteSequence: {fileID: -583812406, guid: 5506c92e7b5734dd3b16eaba61d004c0, type: 3}

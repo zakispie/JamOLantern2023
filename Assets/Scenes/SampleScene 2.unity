@@ -19187,11 +19187,7 @@ PrefabInstance:
     - target: {fileID: 4969977265293632549, guid: 00291c59ff81743e091300a73a7e8c4b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 01c1fd6d43c6b4f718568393d28852e8, type: 3}
-    - target: {fileID: 4969977265293632549, guid: 00291c59ff81743e091300a73a7e8c4b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -2139986999, guid: 5506c92e7b5734dd3b16eaba61d004c0, type: 3}
     - target: {fileID: 4969977265293632549, guid: 00291c59ff81743e091300a73a7e8c4b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

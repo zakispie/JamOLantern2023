@@ -85,6 +85,7 @@ namespace DefaultNamespace
             alreadyUsed.Add(dancePosition);
             Vector3 danceWorldPos = tilemap.GetCellCenterWorld(dancePosition);
             dancer.transform.position = danceWorldPos;
+            dancer.GetComponent<Dancers>()._inLine = false;
             //Instantiate(dancers[Random.Range(0, dancers.Count)], danceWorldPos, Quaternion.identity);
         }
         

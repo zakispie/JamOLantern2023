@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
         int peopleLost = Mathf.FloorToInt(dancers.Count * (1 - percentageLost));
         for (int i = dancers.Count - 1; i >= peopleLost; i--)
         {
+            dancers[i].GetComponent<SpriteRenderer>().sprite = dancers[i].GetComponent<Dancers>().IdleSprite;
             levelManager.PlaceRandomly(dancers[i]);
             dancers.RemoveAt(i);
         }
