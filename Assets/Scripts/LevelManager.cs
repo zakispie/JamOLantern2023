@@ -123,6 +123,11 @@ namespace DefaultNamespace
         public void RealExit()
         {
             Time.timeScale = 1;
+            _player.AddScores();
+            for (int i = 0; i < timer.GetSeconds(); i++)
+            {
+                ScoreCounter.AddScore(ScoreCounter.ScoreType.Time);
+            }
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 

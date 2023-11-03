@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     
     // List of Dancers
     private List<GameObject> dancers = new List<GameObject>();
+    private ScoreCounter scores;
 
     /// <summary>
     /// Assigns variables
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        scores = FindObjectOfType<ScoreCounter>();
         rb = GetComponentInChildren<Rigidbody2D>();
         spriteRenderer  = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
@@ -145,6 +147,14 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void AddScores()
+    {
+        foreach (var d in dancers)
+        {
+            ScoreCounter.AddScore(ScoreCounter.ScoreType.Partygoer);
+        }
     }
 
     /// <summary>

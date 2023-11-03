@@ -1,4 +1,5 @@
 using System.Collections;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 
@@ -40,7 +41,7 @@ public class Timer : MonoBehaviour
             yield return new WaitForSeconds(1);
             secondsUntilLose--;
         }
-
+        FindObjectOfType<LevelManager>().RealExit();
         yield break;
     }
 
