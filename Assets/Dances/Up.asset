@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ebf96bf29f484c96c7826f8d5b807f, type: 3}
+  m_Name: Up
+  m_EditorClassIdentifier: 
+  comboSequence: 1
+  keyboardSpriteSequence: {fileID: 21300000, guid: b2841cebcace64641bb233778dca5fea, type: 3}
+  playerSpriteSequence: {fileID: 895763698, guid: e41f0bd7e0e2047148567051047a033a, type: 3}

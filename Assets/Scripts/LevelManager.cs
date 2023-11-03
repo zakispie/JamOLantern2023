@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -13,13 +16,17 @@ namespace DefaultNamespace
         [SerializeField] private bool wantRandomSpawning;
         [SerializeField] private int howManyDancersWanted;
         [SerializeField] private Tilemap tilemap;
+        [SerializeField] private GameObject pauseScreen;
+        [SerializeField] private GameObject exitText;
         
         private PlayerController _player;
         private List<Vector3Int> alreadyUsed;
+        private Timer timer;
 
         private void Start()
         {
             _player = FindObjectOfType<PlayerController>();
+            timer = FindObjectOfType<Timer>();
             _player.AddManager(this);
             //tilemap.CompressBounds();
             alreadyUsed = new List<Vector3Int>();
@@ -79,6 +86,50 @@ namespace DefaultNamespace
             Vector3 danceWorldPos = tilemap.GetCellCenterWorld(dancePosition);
             dancer.transform.position = danceWorldPos;
             //Instantiate(dancers[Random.Range(0, dancers.Count)], danceWorldPos, Quaternion.identity);
+        }
+        
+        private void OnPause(InputValue inputValue)
+        {
+            Time.timeScale = 0;
+            pauseScreen.SetActive(true);
+        }
+
+        public void Resume()
+        {
+            pauseScreen.SetActive(false);
+            Time.timeScale = 1;
+        }
+
+        public void MainMenu()
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        public void ExitDoor()
+        {
+            if (timer.GetSeconds() > 5)
+            {
+                Time.timeScale = 0;
+                exitText.SetActive(true);
+                exitText.GetComponentInChildren<TextMeshProUGUI>().text = timer.GetSeconds().ToString() + " seconds";
+            }
+            else
+            {
+                RealExit();
+            }
+            
+        }
+
+        public void RealExit()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        public void NoExit()
+        {
+            exitText.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 }

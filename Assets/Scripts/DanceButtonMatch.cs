@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class DanceButtonMatch : DanceMinigame
 {
     [Header("Dance Configuration")]
     [Tooltip("Possible dance sequences")] 
-    [SerializeField] private List<DanceSequence> possibleDanceSequences;
+    [SerializeField] private List<DanceMove> possibleDanceMoves;
 
     [Tooltip("Delay between combos (50 = 1 second)")]
     [SerializeField] private int delayBetweenCombos;
@@ -43,6 +44,12 @@ public class DanceButtonMatch : DanceMinigame
     
     [Tooltip("Image that indicates next next next button press")]
     [SerializeField] private Image queuedButton3;
+    
+    [Tooltip("Will be instantiated when a dance is succeeded")]
+    [SerializeField] public GameObject successEffect;
+    
+    [Tooltip("Will be instantiated when a dance is failed")]
+    [SerializeField] public GameObject failEffect;
 
     // Tracks whether there is currently a dance prompt on screen
     private bool danceInProgress = false;
@@ -54,7 +61,7 @@ public class DanceButtonMatch : DanceMinigame
     private int delayCounter = 0;
     
     // Tracks current dance sequence
-    private DanceSequence currentDanceSequence;
+    private List<DanceMove> currentDanceSequence;
 
     /// <summary>
     /// Assigns buttonImage and disables it
@@ -65,7 +72,10 @@ public class DanceButtonMatch : DanceMinigame
         queuedButton1.gameObject.SetActive(false);
         queuedButton2.gameObject.SetActive(false);
         queuedButton3.gameObject.SetActive(false);
-        currentDanceSequence = possibleDanceSequences[Random.Range(0, possibleDanceSequences.Count)];
+        for (int i = 0; i < Random.Range(4, 9); i++)
+        {
+            currentDanceSequence.Add(possibleDanceMoves[Random.Range(0, possibleDanceMoves.Count)]);
+        }
     }
 
     /// <summary>
@@ -93,9 +103,9 @@ public class DanceButtonMatch : DanceMinigame
             // display "8"
             AudioSource.PlayClipAtPoint(countdownSound, PlayerController.playerPosition);
             buttonImage.sprite = eightOnTimer;
-            queuedButton1.sprite = currentDanceSequence.keyboardSpriteSequence[0];
-            queuedButton2.sprite = currentDanceSequence.keyboardSpriteSequence[1];
-            queuedButton3.sprite = currentDanceSequence.keyboardSpriteSequence[2];
+            queuedButton1.sprite = currentDanceSequence[0].keyboardSpriteSequence;
+            queuedButton2.sprite = currentDanceSequence[1].keyboardSpriteSequence;
+            queuedButton3.sprite = currentDanceSequence[2].keyboardSpriteSequence;
         } else if (delayCounter == delayBetweenCombos - 50)
         {
             buttonImage.gameObject.SetActive(true);
@@ -107,8 +117,8 @@ public class DanceButtonMatch : DanceMinigame
             AudioSource.PlayClipAtPoint(countdownSound, PlayerController.playerPosition);
             buttonImage.sprite = sevenOnTimer;
             queuedButton1.sprite = eightOnTimer;
-            queuedButton2.sprite = currentDanceSequence.keyboardSpriteSequence[0];
-            queuedButton3.sprite = currentDanceSequence.keyboardSpriteSequence[1];
+            queuedButton2.sprite = currentDanceSequence[0].keyboardSpriteSequence;
+            queuedButton3.sprite = currentDanceSequence[1].keyboardSpriteSequence;
         } else if (delayCounter == delayBetweenCombos - 75)
         {
             buttonImage.gameObject.SetActive(true);
@@ -121,7 +131,7 @@ public class DanceButtonMatch : DanceMinigame
             buttonImage.sprite = sixOnTimer;
             queuedButton1.sprite = sevenOnTimer;
             queuedButton2.sprite = eightOnTimer;
-            queuedButton3.sprite = currentDanceSequence.keyboardSpriteSequence[0];
+            queuedButton3.sprite = currentDanceSequence[0].keyboardSpriteSequence;
         } else if (delayCounter == delayBetweenCombos - 100)
         {
             buttonImage.gameObject.SetActive(true);
@@ -185,16 +195,16 @@ public class DanceButtonMatch : DanceMinigame
         if (!danceInProgress) { return DanceStatus.Neutral; } // ignore input if dance is not active 
 
         // Dance Move Failed:
-        if (currentDanceSequence.comboSequence[placeInCombo] != action) {
+        if (currentDanceSequence[placeInCombo].comboSequence != action) {
             // Dance combo failed
            return DanceFail();
         }
 
         // Dance Move Succeeded:
         PlayerController.animator.enabled = false; // disable animator so we can hijack for our sweet moves
-        PlayerController.spriteRenderer.sprite = currentDanceSequence.playerSpriteSequence[placeInCombo];
+        PlayerController.spriteRenderer.sprite = currentDanceSequence[placeInCombo].playerSpriteSequence;
         
-        if (++placeInCombo == currentDanceSequence.comboSequence.Count) {
+        if (++placeInCombo == currentDanceSequence.Count) {
             // Completed the dance combo successfully
             return DanceSuccess();
         }
@@ -217,8 +227,12 @@ public class DanceButtonMatch : DanceMinigame
         queuedButton1.gameObject.SetActive(false);
         queuedButton2.gameObject.SetActive(false);
         queuedButton3.gameObject.SetActive(false);
-        currentDanceSequence = possibleDanceSequences[Random.Range(0, possibleDanceSequences.Count)];
-        Instantiate(currentDanceSequence.successEffect, PlayerController.playerPosition, Quaternion.identity);
+        currentDanceSequence.Clear();
+        for (int i = 0; i < Random.Range(4, 9); i++)
+        {
+            currentDanceSequence.Add(possibleDanceMoves[Random.Range(0, possibleDanceMoves.Count)]);
+        }
+        Instantiate(successEffect, PlayerController.playerPosition, Quaternion.identity);
         placeInCombo = 0;
         buttonImage.gameObject.SetActive(false);
         Debug.Log("Combo Success!");
@@ -239,8 +253,12 @@ public class DanceButtonMatch : DanceMinigame
         queuedButton1.gameObject.SetActive(false);
         queuedButton2.gameObject.SetActive(false);
         queuedButton3.gameObject.SetActive(false);
-        currentDanceSequence = possibleDanceSequences[Random.Range(0, possibleDanceSequences.Count)];
-        Instantiate(currentDanceSequence.failEffect, PlayerController.playerPosition, Quaternion.identity);
+        currentDanceSequence.Clear();
+        for (int i = 0; i < Random.Range(4, 9); i++)
+        {
+            currentDanceSequence.Add(possibleDanceMoves[Random.Range(0, possibleDanceMoves.Count)]);
+        }
+        Instantiate(failEffect, PlayerController.playerPosition, Quaternion.identity);
         placeInCombo = 0;
         buttonImage.gameObject.SetActive(false);
         Debug.Log("Combo Broken!");
@@ -255,8 +273,8 @@ public class DanceButtonMatch : DanceMinigame
     /// </summary>
     void DisplayNextAction()
     {
-        buttonImage.sprite = currentDanceSequence.keyboardSpriteSequence[placeInCombo];
-        int danceLength = currentDanceSequence.keyboardSpriteSequence.Count;
+        buttonImage.sprite = currentDanceSequence[placeInCombo].keyboardSpriteSequence;
+        int danceLength = currentDanceSequence.Count;
         
         print (danceLength + ", " + placeInCombo);
         if (placeInCombo + 1 >= danceLength)
@@ -265,7 +283,7 @@ public class DanceButtonMatch : DanceMinigame
         }
         else
         {
-            queuedButton1.sprite = currentDanceSequence.keyboardSpriteSequence[placeInCombo + 1];
+            queuedButton1.sprite = currentDanceSequence[placeInCombo + 1].keyboardSpriteSequence;
         }
         
         if (placeInCombo + 2 >= danceLength)
@@ -273,14 +291,14 @@ public class DanceButtonMatch : DanceMinigame
             queuedButton2.gameObject.SetActive(false);
         }  else
         {
-            queuedButton2.sprite = currentDanceSequence.keyboardSpriteSequence[placeInCombo + 2];
+            queuedButton2.sprite = currentDanceSequence[placeInCombo + 2].keyboardSpriteSequence;
         }
         
         if (placeInCombo + 3 >= danceLength)
         {
             queuedButton3.gameObject.SetActive(false);
         }  else  {
-            queuedButton3.sprite = currentDanceSequence.keyboardSpriteSequence[placeInCombo + 3];
+            queuedButton3.sprite = currentDanceSequence[placeInCombo + 3].keyboardSpriteSequence;
         }
     }
 }

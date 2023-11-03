@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private float percentageLost = 0.25f;
-    
+
     private Vector3Int nextCellPosition;
     private Vector3 prevPosition;
     private LevelManager levelManager;
@@ -79,6 +79,10 @@ public class PlayerController : MonoBehaviour
         switch (result) {
             case DanceStatus.Correct:
                 // Action Correct
+                foreach (var d in dancers)
+                {
+                    d.GetComponent<Dancers>().changeSprite(action);
+                }
                 break;
             case DanceStatus.Incorrect:
                 DropPeople();
@@ -142,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
-    
+
     /// <summary>
     /// Updates the position of the rigidbody based on the current movement input
     /// </summary>
@@ -193,7 +197,7 @@ public class PlayerController : MonoBehaviour
     {
         RelayAction(DanceAction.LeftDance);
     }
-
+    
     /// <summary>
     ///  Handles when right arrow key is pressed
     ///  </summary>

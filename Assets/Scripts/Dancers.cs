@@ -5,13 +5,59 @@ namespace DefaultNamespace
 {
     public class Dancers : MonoBehaviour
     {
+        [SerializeField] private Sprite IdleSprite;
+        [SerializeField] private Sprite LeftSprite;
+        [SerializeField] private Sprite RightSprite;
+        [SerializeField] private Sprite UpSprite;
+        [SerializeField] private Sprite DownSprite;
+        private bool _changedSprite;
         private LevelManager _levelManager;
         private bool _inLine;
+        private float _spriteChangeCounter;
 
         private void Start()
         {
             _levelManager = FindObjectOfType<LevelManager>();
             _inLine = false;
+            _changedSprite = false;
+            _spriteChangeCounter = 0f;
+        }
+        
+        public void changeSprite(DanceAction action)
+        {
+            if (action == DanceAction.UpDance)
+            {
+                
+            } 
+            else if (action == DanceAction.DownDance)
+            {
+                
+            }
+            else if (action == DanceAction.LeftDance)
+            {
+                
+            }
+            else if (action == DanceAction.RightDance)
+            {
+                
+            }
+
+            _changedSprite = true;
+            _spriteChangeCounter = 0f;
+            
+        }
+
+        private void Update()
+        {
+            if (_changedSprite)
+            {
+                _spriteChangeCounter += Time.deltaTime;
+                if (_spriteChangeCounter >= 1)
+                {
+                    _changedSprite = false;
+                    _spriteChangeCounter = 0f;
+                }
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)

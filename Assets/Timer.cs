@@ -43,4 +43,9 @@ public class Timer : MonoBehaviour
 
         yield break;
     }
+
+    public int GetSeconds()
+    {
+        return secondsUntilLose;
+    }
 }

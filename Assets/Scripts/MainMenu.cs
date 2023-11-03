@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject credits;
     /// <summary>
     /// Opens the play scene
     /// </summary>
@@ -20,5 +21,10 @@ public class MainMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void Credits()
+    {
+        credits.SetActive(true);
     }
 }
