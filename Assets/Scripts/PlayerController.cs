@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float percentageLost = 0.25f;
 
     private Vector3Int nextCellPosition;
+    private Vector3Int prevCellPosition;
     private Vector3 prevPosition;
     private LevelManager levelManager;
 
@@ -120,6 +121,7 @@ public class PlayerController : MonoBehaviour
     
     private void MoveAround()
     {
+        prevCellPosition = nextCellPosition;
         nextCellPosition += new Vector3Int((int)movementInput.x, (int)movementInput.y, 0);
         if (tilemap.HasTile(nextCellPosition))
         {
@@ -140,7 +142,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Game Over!");
+            nextCellPosition = prevCellPosition;
         }
     }
     
