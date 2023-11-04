@@ -57,7 +57,10 @@ public class DisplayScores : MonoBehaviour
 
     public void MainMenu()
     {
-        Destroy(FindObjectOfType<ScoreCounter>());
+        var scoreCounter = GameObject.FindGameObjectWithTag("ScoreCounter");
+        scoreCounter.GetComponent<ScoreCounter>().ResetAllScores();
+        Destroy(scoreCounter);
+        
         SceneManager.LoadScene(0);
     }
 }

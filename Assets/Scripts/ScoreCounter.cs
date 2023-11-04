@@ -49,6 +49,16 @@ public class ScoreCounter : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public void ResetAllScores()
+    {
+        playerScore = 0;
+        danceMoveScore = 0;
+        danceSequenceScore = 0;
+        partygoerScore = 0;
+        timeScore = 0;
+        failedMoveScore = 0;
+    }
+
     public static void AddScore(ScoreType scoreType)
     {
         switch (scoreType)

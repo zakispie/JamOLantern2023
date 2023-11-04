@@ -13,6 +13,14 @@ public class DestroyAfterSeconds : MonoBehaviour
     /// </summary>
     void Start()
     {
-        Destroy(this.gameObject, secondsUntilDestroy);
+        if (secondsUntilDestroy != -1)
+        {
+            Destroy(this.gameObject, secondsUntilDestroy);
+        }
+    }
+
+    public void DestroyMe()
+    {
+        Destroy(this.gameObject);
     }
 }

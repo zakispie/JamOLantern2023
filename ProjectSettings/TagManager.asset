@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DanceController
   - ButtonImage
+  - ScoreCounter
   layers:
   - Default
   - TransparentFX
